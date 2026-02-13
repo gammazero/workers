@@ -6,7 +6,9 @@
 [![codecov](https://codecov.io/gh/gammazero/workers/branch/main/graph/badge.svg)](https://codecov.io/gh/gammazero/workers)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/gammazero/workers/blob/main/LICENSE)
 
-The `workers` package implements a simple fixed-size pool of goroutines for executing functions concurrently. The purpose is to limit the amount of concurrency to the number of goroutines in the pool.
+The `workers` package implements a simple fixed-size pool of goroutines for executing functions concurrently. The purpose is to limit concurrency to the number of goroutines in the pool.
+
+When all workers are busy, the channel for submitting tasks blocks. If you are looking for a worker pool that never blocks when submitting tasks, see [workerpool](https://github.com/gammazero/workerpool).
 
 ## Installation
 
