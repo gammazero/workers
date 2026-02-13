@@ -2,31 +2,34 @@ package workers_test
 
 import (
 	"testing"
+	"testing/synctest"
 
 	"github.com/gammazero/workers"
 )
 
 func TestWorkers(t *testing.T) {
-	do, done := workers.New(5)
+	synctest.Test(t, func(t *testing.T) {
+		do, done := workers.New(5)
 
-	const ntasks = 10
-	results := make([]bool, ntasks)
+		const ntasks = 10
+		results := make([]bool, ntasks)
 
-	for i := range ntasks {
-		do <- func() {
-			t.Log("hello", i)
-			results[i] = true
+		for i := range ntasks {
+			do <- func() {
+				t.Log("hello", i)
+				results[i] = true
+			}
 		}
-	}
-	close(do) // stop workers
-	<-done    // wait for all workers to exit
+		close(do) // stop workers
+		<-done    // wait for all workers to exit
 
-	for i, ok := range results {
-		if !ok {
-			t.Errorf("Bad result for task %d", i)
+		for i, ok := range results {
+			if !ok {
+				t.Errorf("Bad result for task %d", i)
+			}
 		}
-	}
-	t.Log("All done")
+		t.Log("All done")
+	})
 }
 
 func TestBadNumberPanics(t *testing.T) {
