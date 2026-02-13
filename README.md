@@ -3,7 +3,6 @@
 
 [![GoDoc](https://pkg.go.dev/badge/github.com/gammazero/workers)](https://pkg.go.dev/github.com/gammazero/workers)
 [![Build Status](https://github.com/gammazero/workers/actions/workflows/go.yml/badge.svg)](https://github.com/gammazero/workers/actions/workflows/go.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gammazero/workers)](https://goreportcard.com/report/github.com/gammazero/workers)
 [![codecov](https://codecov.io/gh/gammazero/workers/branch/main/graph/badge.svg)](https://codecov.io/gh/gammazero/workers)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/gammazero/workers/blob/main/LICENSE)
 
