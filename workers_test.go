@@ -7,6 +7,21 @@ import (
 	"github.com/gammazero/workers"
 )
 
+func TestExample(t *testing.T) {
+	do, done := workers.New(5)
+	requests := []string{"alpha", "beta", "gamma", "delta", "epsilon"}
+
+	for _, r := range requests {
+		do <- func() {
+			t.Log("Handling request:", r)
+		}
+	}
+	close(do) // stop workers
+	<-done    // wait for all workers to exit
+
+	t.Log("All done")
+}
+
 func TestWorkers(t *testing.T) {
 	synctest.Test(t, func(t *testing.T) {
 		do, done := workers.New(5)

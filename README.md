@@ -28,24 +28,16 @@ import (
 
 func main() {
 	do, done := workers.New(5)
+	requests := []string{"alpha", "beta", "gamma", "delta", "epsilon"}
 
-	const ntasks = 10
-	results := make([]bool, ntasks)
-
-	for i := range ntasks {
+	for _, r := range requests {
 		do <- func() {
-			t.Log("hello", i)
-			results[i] = true
+			fmt.Println("Handling request:", r)
 		}
 	}
 	close(do) // stop workers
 	<-done    // wait for all workers to exit
 
-	for i, ok := range results {
-		if !ok {
-			fmt.Println("Bad result for task %d", i)
-		}
-	}
 	fmt.Println("All done")
 }
 ```
