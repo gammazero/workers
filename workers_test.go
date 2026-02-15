@@ -26,6 +26,9 @@ func TestWorkers(t *testing.T) {
 	synctest.Test(t, func(t *testing.T) {
 		do, done := workers.New(5)
 
+		// Should do nothing.
+		do <- nil
+
 		const ntasks = 10
 		results := make([]bool, ntasks)
 
@@ -43,6 +46,7 @@ func TestWorkers(t *testing.T) {
 				t.Errorf("Bad result for task %d", i)
 			}
 		}
+
 		t.Log("All done")
 	})
 }

@@ -27,7 +27,9 @@ func New(numWorkers int) (chan<- func(), <-chan struct{}) {
 	for range numWorkers {
 		wg.Go(func() {
 			for f := range work {
-				f()
+				if f != nil {
+					f()
+				}
 			}
 		})
 	}
